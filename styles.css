@@ -1,0 +1,22 @@
+.buttons {
+    display:flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin-top: 70px;
+}
+button {
+    font-size: 20px;
+    height: 200px;
+    width: 200px;
+}
+h1 {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.display {
+    font-size: 20px;
+    text-align: center;
+}

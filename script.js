@@ -1,88 +1,119 @@
-let HumanScore = 0;
-let ComputerScore = 0;
+const container = document.querySelector("#container")
+const rock = document.querySelector("#rock")
+const paper = document.querySelector("#paper")
+const scissors = document.querySelector("#scissors")
+let pc = 0;
+let human = 0;
+const compchoice = document.createElement("div");
+const humanchoice = document.createElement("div");
+const result = document.createElement("div");
+const score = document.createElement("div")
+compchoice.classList.add("display");
+humanchoice.classList.add("display")
+result.classList.add("display")
+score.classList.add("display")
 function getComputerChoice() {
     let a = Math.random();
     if (a < 0.33) {
-        console.log("The computer chose Rock");
-        return "rock";
+        compchoice.textContent = "The computer chose rock!"
+        return "rock"
     }
-    else if (a > 0.33 && a < 0.66) {
-        console.log("The computer chose Paper");
-        return "paper";
-    }
-    else{
-        console.log("The computer chose Scissors");
-        return "scissors";
-    }
-}
-
-function getHumanChoice() {
-    let a = prompt("Enter Rock, Paper, or Scissors");
-    if (a.toLowerCase() == "rock"){
-        return "rock";
-    }
-    else if (a.toLowerCase() == "paper") {
-        return "paper";
+    else if(a > 0.33 && a < 0.66) {
+        compchoice.textContent = "The computer chose paper!"
+        return "paper"
     }
     else {
-        return "scissors";
+        compchoice.textContent = "The computer chose scissors!"
+        return "scissors"
     }
 }
-
-function playRound(human, computer) {
-    if (human == computer) {
-        console.log("Its a tie!!");
+rock.addEventListener("click", () => {
+    let comp = getComputerChoice()
+    humanchoice.textContent = "You chose rock!"
+    container.appendChild(humanchoice)
+    container.appendChild(compchoice)
+    if (comp == "rock") {
+        result.textContent = `Its a tie`
     }
-    else if (computer == "rock") {
-        if (human == "paper") {
-            console.log("You win! Paper beats Rock");
-            HumanScore ++;
-        }
-        else {
-            console.log("You lose! Rock beats Scissors");
-            ComputerScore++;
-        }
-    }
-    else if (computer == "paper") {
-        if (human == "scissors") {
-            console.log("You win! Scissors beats paper");
-            HumanScore++;
-        }
-        else {
-            console.log("You lose! Paper beats rock");
-            ComputerScore++;
-        }
+    else if (comp == "scissors") {
+        human++;
+        result.textContent = `You get a point!`
     }
     else {
-        if (human == "rock") {
-            console.log("You Win! Rock beats scissors");
-            HumanScore++;
-        }
-        else {
-            console.log("You lose! Paper beats rock");
-            ComputerScore++;
-        }
+        pc ++;
+        result.textContent = `The computer gets a point`
     }
-    console.log(`The Score is ${HumanScore}:${ComputerScore}`);
-}
-
-function playGame() {
-    let i = 0;
-    for(i=0;i<5;i++)
-    {
-        Human = getHumanChoice();
-        computer = getComputerChoice();
-        playRound(Human, computer);
+    container.appendChild(result)
+    score.textContent = `PC:${pc}  Human:${human}`
+    container.appendChild(score)
+    if (pc == 5) {
+        result.textContent = "The PC has won the game (press any button to reset)"
+        human = 0
+        pc = 0
     }
-    if (HumanScore > ComputerScore) {
-        console.log("You win!!");
-    } 
-    else if (HumanScore == ComputerScore) {
-        console.log("Its a tie");
+    if (human == 5) {
+        result.textContent = "You have won the game (press any button to reset)"
+        human = 0
+        pc = 0
+    }
+});
+paper.addEventListener("click", () => {
+    let comp = getComputerChoice()
+    humanchoice.textContent = "You chose paper!"
+    container.appendChild(humanchoice)
+    container.appendChild(compchoice)
+    if (comp == "rock") {
+        human ++;
+        result.textContent = `You get a point!`
+    }
+    else if (comp == "scissors") {
+        pc ++;
+        result.textContent = `The computer gets a point!`
     }
     else {
-        console.log("You lose");
+        result.textContent = `Its a tie`
     }
-}
-
-playGame();
+    container.appendChild(result)
+    score.textContent = `PC:${pc}  Human:${human}`
+    container.appendChild(score)
+    if (pc == 5) {
+        result.textContent = "The PC has won the game (press any button to reset)"
+        human = 0
+        pc = 0
+    }
+    if (human == 5) {
+        result.textContent = "You have won the game (press any button to reset)"
+        human = 0
+        pc = 0
+    }
+});
+scissors.addEventListener("click", () => {
+    let comp = getComputerChoice()
+    humanchoice.textContent = "You chose scissors!"
+    container.appendChild(humanchoice)
+    container.appendChild(compchoice)
+    if (comp == "rock") {
+        pc ++;
+        result.textContent = `The Computer gets a point!`
+    }
+    else if (comp == "scissors") {
+        result.textContent = `Its a tie`
+    }
+    else {
+        human ++;
+        result.textContent = "You get a point!"
+    }
+    container.appendChild(result)
+    score.textContent = `PC:${pc}  Human:${human}`
+    container.appendChild(score)
+    if (pc == 5) {
+        result.textContent = "The PC has won the game (press any button to reset)"
+        human = 0
+        pc = 0
+    }
+    if (human == 5) {
+        result.textContent = "You have won the game (press any button to reset)"
+        human = 0
+        pc = 0
+    }
+});
